@@ -1,0 +1,108 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarity - Dashboard</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dashboard.css"> <!-- Custom dashboard page styles -->
+</head>
+<body>
+    <header>
+        <h1>Clarity</h1>
+        <nav>
+            <ul>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h2>Welcome Back, [Username]!</h2>
+            <p>Here's where you can stay up-to-date with your elected officials, track their votes on bills, explore their decisions, and more.</p>
+        </section>
+
+        <section class="search">
+            <h2>Find Your Elected Officials</h2>
+            <form action="/search" method="GET">
+                <input type="text" name="zipcode" placeholder="Enter ZIP code">
+                <button type="submit">Search</button>
+                <button type="button" onclick="getLocation()">Use My Location</button>
+            </form>
+        </section>
+
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Clarity. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function getLocation() {
+            // Check if geolocation is supported
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            // Use latitude and longitude to get location data
+            // Then redirect or perform further actions
+            console.log("Latitude: " + latitude + " Longitude: " + longitude);
+        }
+    </script>
+</body>
+</html> --}}
+
+
+
+
+        <!-- dashboard.hbs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/main.css"> <!-- Include your main stylesheet -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Dashboard, {{ user.username }}</h1>
+    </header>
+
+    <main>
+        <h2>Search for Officials</h2>
+        <form id="searchForm">
+            <input type="text" id="zipCode" name="zipCode" placeholder="Enter ZIP code">
+            <button type="submit">Search by ZIP</button>
+        </form>
+        <button id="locationButton">Use My Location</button>
+        <div id="searchResults">
+            <!-- Display search results here -->
+        </div>
+        <section class="features">
+            <h2>Explore Your Elected Officials</h2>
+            <ul>
+                <li>Track votes on bills</li>
+                <li>Explore officials' decisions</li>
+                <li>View party affiliations</li>
+                <li>Access funding information</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Clarity</p>
+    </footer>
+
+    <script src="/js/dashboard.js"></script> <!-- Include your dashboard JavaScript file -->
+</body>
+</html>

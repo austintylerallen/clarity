@@ -2,50 +2,60 @@
 
 /* Global styles */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #212529; /* Bootstrap's default text color */
 }
 
 header, footer {
     background-color: #263238; /* Dark blue */
     padding: 20px;
+    color: #fff; /* White text */
 }
 
-header h1, footer p {
-    margin: 0;
-    color: #fff; /* White */
-    font-family: 'Roboto', sans-serif; /* Use Roboto font for the header */
-    font-weight: 300; /* Thin (300) font weight */
+main {
+    padding: 20px;
 }
 
-nav {
-    background-color: #263238; /* Match header background */
-    padding: 20px 0; /* Add padding to the top and bottom */
-    text-align: right; /* Align nav to the right */
+form {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
+.form-group {
+    margin-bottom: 20px;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 20px;
+label {
+    display: block;
+    margin-bottom: 5px;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #ccc; /* Light gray */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-nav ul li a:hover {
-    color: #fff; /* White */
+button {
+    padding: 10px 20px;
+    background-color: #0d47a1; /* Darker shade of blue */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-/* Hero section */
+button:hover {
+    background-color: #002171; /* Even darker shade of blue */
+}
+
+/* Landing page styles */
 .hero {
     background-color: #1a237e; /* Darker blue */
     padding: 100px 20px;
@@ -106,122 +116,37 @@ footer {
     color: #ccc; /* Light gray */
 }
 
-/* Logo styles */
-#logo {
-    width: 50px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Add space between the logo and navigation */
-    margin-left: 10px; 
-    vertical-align: middle; /* Adjust this value as needed */
-    margin-right: 10px; /* Add margin-right for spacing */
-}
-
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
-
-.login-container {
-    width: 300px;
-    margin: 100px auto;
-    background-color: #fff;
+/* Navigation bar */
+nav {
+    background-color: #263238; /* Dark blue */
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: right; /* Align navigation to the right */
 }
 
-h2 {
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="password"] 
-    {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-
-/* main.css */
-
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
+nav ul {
+    list-style-type: none;
     padding: 0;
 }
 
-header, footer {
-    background-color: #263238; /* Dark blue */
-    padding: 20px;
-    color: #fff; /* White text */
+nav ul li {
+    display: inline;
+    margin-right: 20px;
 }
 
-main {
-    padding: 20px;
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* White */
 }
 
-form {
-    max-width: 400px;
-    margin: 0 auto;
+nav ul li a:hover {
+    color: #ccc; /* Light gray on hover */
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #0d47a1; /* Darker shade of blue */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #002171; /* Even darker shade of blue */
+#logo {
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align vertically with text */
+    margin-right: 10px; /* Add margin for spacing */
 }

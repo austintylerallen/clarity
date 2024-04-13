@@ -10,7 +10,8 @@
         "bootstrap": "*",
         "express": "^4.17.1",
         "express-handlebars": "^5.3.3",
-        "passport": "*",
+        "express-session": "*",
+        "passport-local": "*",
         "sequelize": "^6.37.2",
         "pg": "^8.7.1"
     }

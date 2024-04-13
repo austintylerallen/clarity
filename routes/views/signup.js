@@ -1,5 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { hashPassword } = require('../utils/passwordUtils');
+
+
+const plainPassword = 'password123';
+const hashedPassword = hashPassword(plainPassword);
+
+console.log(hashedPassword); // Output the hashed password
+
 
 // Define route handler for the signup page
 router.get('/', (req, res) => {
@@ -17,5 +25,7 @@ router.post('/', (req, res) => {
     // Redirect the user to a different page after signup (e.g., home page)
     res.redirect('/');
 });
+
+
 
 module.exports = router;

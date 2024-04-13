@@ -1,16 +1,14 @@
-// models/politician.js
+// models/Politician.js
 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Vote = require('./vote'); // Assuming Vote model is defined in a separate file
 
-const Politician = sequelize.define('politician', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
+const Politician = sequelize.define('Politician', {
     name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    position: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -20,37 +18,28 @@ const Politician = sequelize.define('politician', {
     district: {
         type: DataTypes.STRING
     },
-    // Add more columns as needed
-}, {
-    tableName: 'politicians', // Update table name if necessary
-    timestamps: false
+    state: {
+        type: DataTypes.STRING
+    },
+    zipCode: {
+        type: DataTypes.STRING
+    },
+    latitude: {
+        type: DataTypes.FLOAT
+    },
+    longitude: {
+        type: DataTypes.FLOAT
+    }
 });
 
-// Define associations
-Politician.hasMany(Vote, { foreignKey: 'politicianId' }); // A politician can have many votes
-Vote.belongsTo(Politician, { foreignKey: 'politicianId' }); // Each vote belongs to one politician
+// Add class methods to search politicians by ZIP code or coordinates
+Politician.findByZipCode = async function(zipCode) {
+    return await Politician.findAll({ where: { zipCode } });
+};
 
-// Define association with Bill model
-const Bill = sequelize.define('bill', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    description: {
-        type: DataTypes.TEXT
-    },
-    // Add more columns as needed
-}, {
-    tableName: 'bills',
-    timestamps: false
-});
-
-Politician.belongsToMany(Bill, { through: Vote }); // A politician can vote for many bills
-Bill.belongsToMany(Politician, { through: Vote }); // A bill can be voted for by many politicians
+Politician.findByCoordinates = async function(latitude, longitude) {
+    // Implement logic to search politicians by coordinates (e.g., within a certain radius)
+    return await Politician.findAll({ where: { latitude, longitude } });
+};
 
 module.exports = Politician;
