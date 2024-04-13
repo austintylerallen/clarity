@@ -1,0 +1,17 @@
+{
+    "name": "clarity",
+    "version": "1.0.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "bcrypt": "*",
+        "bootstrap": "*",
+        "express": "^4.17.1",
+        "express-handlebars": "^5.3.3",
+        "passport": "*",
+        "sequelize": "^6.37.2",
+        "pg": "^8.7.1"
+    }
+}

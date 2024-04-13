@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' http://localhost:3001/css/fonts/">
+</head>
+<body>
+{{> header}} <!-- Include the header partial here -->
+    <main>
+        {{{ body }}}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your App. All rights reserved.</p>
+    </footer>
+</body>
+</html>
