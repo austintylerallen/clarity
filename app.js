@@ -7,6 +7,8 @@ const path = require('path');
 const env = process.env.NODE_ENV || 'development';
 const config = dbConfig[env];
 const signupRouter = require('./routes/views/signup'); // Require the signup router
+const politicianRoutes = require('./routes/politicianRoutes');
+const loginRouter = require('./routes/login'); // Require the login router
 
 const sequelize = new Sequelize(
     config.database,
@@ -39,6 +41,11 @@ app.use((req, res, next) => {
     }
 });
 
+app.use('/politicians', politicianRoutes);
+
+// Use the login router with base URL '/login'
+app.use('/login', loginRouter);
+
 // Define route handler for the home page
 app.get('/', (req, res) => {
     console.log('Rendering home page...');
@@ -51,14 +58,14 @@ app.get('/about', (req, res) => {
     res.render('about', { layout: 'main' }); // Render the about view file with the main layout
 });
 
-// Define route handler for the login page
-app.get('/login', (req, res) => {
-    console.log('Rendering login page...');
-    res.render('login', { layout: 'main' }); // Render the login view file with the main layout
-});
-
 // Use the signup router with base URL '/signup'
 app.use('/signup', signupRouter);
+
+// Define route handler for the dashboard page
+app.get('/dashboard', (req, res) => {
+    console.log('Rendering dashboard page...');
+    res.render('dashboard', { layout: 'main' }); // Render the dashboard view file with the main layout
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
