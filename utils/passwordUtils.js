@@ -1,17 +1,13 @@
-const { hashPassword } = require('./utils/passwordUtils.js');
+const bcrypt = require('bcrypt');
 
-// Example usage in a signup route handler
-router.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+// Function to hash the password
+const hashPassword = async (password) => {
+    // Your hashing logic using bcrypt
+};
 
-  try {
-    // Hash the password before saving it to the database
-    const hashedPassword = hashPassword(password);
+// Function to compare passwords
+const comparePasswords = async (password, hashedPassword) => {
+    // Your logic to compare passwords using bcrypt
+};
 
-    // Save the hashed password to the database along with other user data
-    // Your code for saving user data goes here...
-  } catch (error) {
-    console.error('Error signing up user:', error);
-    res.status(500).json({ message: 'Internal server error.' });
-  }
-});
+module.exports = { hashPassword, comparePasswords };

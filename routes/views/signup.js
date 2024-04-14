@@ -1,13 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { hashPassword } = require('../utils/passwordUtils');
-
-
-const plainPassword = 'password123';
-const hashedPassword = hashPassword(plainPassword);
-
-console.log(hashedPassword); // Output the hashed password
-
 
 // Define route handler for the signup page
 router.get('/', (req, res) => {
@@ -19,13 +11,11 @@ router.post('/', (req, res) => {
     // Extract form data from request body
     const { username, email, password } = req.body;
 
-    // Process the form data (e.g., store it in the database)
-    // This is where you would typically interact with your database to save the user information
+    // Process the form data (e.g., validate inputs, store user information in database)
+    // Your code for saving user data goes here...
 
     // Redirect the user to a different page after signup (e.g., home page)
     res.redirect('/');
 });
-
-
 
 module.exports = router;
