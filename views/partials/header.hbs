@@ -1,12 +1,37 @@
-<header>
-    <h1>Welcome to Clarity</h1>
-    <nav>
-        <img src="/img/logo.png" alt="Logo" id="logo">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/signup">Create Account</a></li>
-            <li><a href="/login">Login</a></li>
-            <!-- Add more navigation links as needed -->
-        </ul>
-    </nav>
-</header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarity</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Clarity</h1>
+        <nav>
+            <img src="/img/logo.png" alt="Logo" id="logo">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/signup">Create Account</a></li>
+                <li><a href="/login">Login</a></li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </main>
+</body>
+</html>

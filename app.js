@@ -1,75 +1,61 @@
-const Sequelize = require('sequelize');
-const dbConfig = require('./config/database');
-require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const env = process.env.NODE_ENV || 'development';
-const config = dbConfig[env];
-const signupRouter = require('./routes/views/signup'); // Require the signup router
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const sequelize = require('./config/database');
 const politicianRoutes = require('./routes/politicianRoutes');
-const loginRouter = require('./routes/login'); // Require the login router
+const loginRouter = require('./routes/views/login');
+const signupRouter = require('./routes/views/signup');
+const authRoutes = require('./routes/authRoutes');
 
-const sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
-);
 const app = express();
+
+// Initialize Passport and set it up to work with Express
+require('./config/passport')(passport);
+app.use(passport.initialize());
 
 // Set up Handlebars as the template engine
 app.engine('hbs', exphbs({
     extname: '.hbs',
-    layoutsDir: path.join(__dirname, 'views/layouts/') // Specify the layout directory explicitly
+    layoutsDir: path.join(__dirname, 'views/layouts/')
 }));
-app.set('view engine', 'hbs');  // Set the view engine to Handlebars
-app.set('views', path.join(__dirname, 'views')); // Set the views directory
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set Content-Security-Policy header
-app.use((req, res, next) => {
-    try {
-        console.log('Setting Content-Security-Policy header...');
-        res.setHeader('Content-Security-Policy', "default-src 'none'; style-src 'self' 'unsafe-inline' http://localhost:3001/css/main.css; img-src 'self'; font-src 'self' http://localhost:3001/css/fonts/");
-        next();
-    } catch (error) {
-        console.error('Error setting CSP header:', error);
-        next(error); // Pass the error to the error handling middleware
-    }
-});
+// Parse incoming request bodies with JSON payloads
+app.use(bodyParser.json());
 
-app.use('/politicians', politicianRoutes);
-
-// Use the login router with base URL '/login'
-app.use('/login', loginRouter);
-
-// Define route handler for the home page
+// Define base routes
 app.get('/', (req, res) => {
-    console.log('Rendering home page...');
-    res.render('home', { layout: 'main' }); // Render the home view file with the main layout
+    res.render('home', { layout: 'main' });
 });
-
-// Define route handler for the about page
 app.get('/about', (req, res) => {
-    console.log('Rendering about page...');
-    res.render('about', { layout: 'main' }); // Render the about view file with the main layout
+    res.render('about', { layout: 'main' });
 });
 
-// Use the signup router with base URL '/signup'
+// Mount specific feature routers
+app.use('/politicians', politicianRoutes);
+app.use('/auth', authRoutes);  // This includes /login, /logout, /forgot-password as defined in authRoutes.js
+
+// Separate routers for login and signup under specific paths
+app.use('/login', loginRouter);  // Ensure this only handles login form display and submission if needed separately
 app.use('/signup', signupRouter);
 
-// Define route handler for the dashboard page
+// Dashboard route
 app.get('/dashboard', (req, res) => {
-    console.log('Rendering dashboard page...');
-    res.render('dashboard', { layout: 'main' }); // Render the dashboard view file with the main layout
+    res.render('dashboard', { layout: 'main' });
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+// Start the server
+const PORT = process.env.PORT || 3000;
+sequelize.sync().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server started on port ${PORT}`);
+    });
+}).catch(err => {
+    console.error('Unable to connect to the database:', err);
 });
-
-console.log('Express server initialized.');

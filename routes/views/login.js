@@ -1,36 +1,39 @@
-// login.js
-
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-const { hashPassword } = require('../utils/passwordUtils');
+const User = require('../../models/User');
 
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+// Route to handle user login
+    const { username, password } = req.body;
 
-  try {
-    // Retrieve user's hashed password from the database based on username
-    const user = await User.findOne({ where: { username } });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found.' });
+    try {
+        // Find the user in the database based on the provided username
+        const user = await User.findOne({ where: { username } });
+
+        if (!user) {
+            // User not found
+            console.log('User not found.');
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        // Check if the provided password matches the user's password
+        const isPasswordValid = await user.isValidPassword(password);
+
+        if (!isPasswordValid) {
+            // Invalid password
+            console.log('Invalid password.');
+            return res.status(401).json({ message: 'Invalid password.' });
+        }
+
+        // Password is valid, login successful
+        console.log('Login successful.');
+        // Implement login logic here, such as generating a session or token
+        // Redirect to the dashboard
+        return res.redirect('/dashboard');
+    } catch (error) {
+        // Error handling
+        console.error('Error logging in user:', error);
+        res.status(500).json({ message: 'Internal server error.' });
     }
-
-    // Hash the password input by the user during login attempt
-    const hashedPasswordInput = hashPassword(password);
-
-    // Compare hashed passwords
-    if (user.password === hashedPasswordInput) {
-      // Passwords match, login successful
-      // Implement login logic (e.g., generate session, set cookies)
-      return res.status(200).json({ message: 'Login successful.' });
-    } else {
-      // Passwords don't match, login failed
-      return res.status(401).json({ message: 'Invalid credentials.' });
-    }
-  } catch (error) {
-    console.error('Error logging in user:', error);
-    res.status(500).json({ message: 'Internal server error.' });
-  }
 });
 
 module.exports = router;
