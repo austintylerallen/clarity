@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../models/User');
+const User = require('../models/User');
 
-// Route to handle user login
+// Route to handle user login via POST request
+router.post('/auth/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -26,7 +27,7 @@ const User = require('../../models/User');
 
         // Password is valid, login successful
         console.log('Login successful.');
-        // Implement login logic here, such as generating a session or token
+        
         // Redirect to the dashboard
         return res.redirect('/dashboard');
     } catch (error) {

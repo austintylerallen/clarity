@@ -9,13 +9,18 @@
         "bcrypt": "*",
         "body-parser": "*",
         "bootstrap": "*",
+        "connect-flash": "*",
         "dotenv": "*",
         "express": "^4.17.1",
         "express-handlebars": "^5.3.3",
         "express-session": "*",
+        "passport": "*",
         "passport-local": "*",
         "pg": "^8.11.5",
-        "sequelize": "*",
-        "passport": "*"
+        "sequelize": "*"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^6.3.4"
     }
 }
